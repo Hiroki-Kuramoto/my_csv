@@ -104,14 +104,12 @@ class mycsv():
         else:
             return len(self.list)
 
-    def get_rows(self, include_col_field=True):
-        if include_col_field == True:
-            if self.list == []:
-                return self.columns
-            else:
-                return [self.columns] + self.list
-        else:
-            return self.list
+    def get_rows(self, include_name_field=True):
+        if include_name_field == True:
+            yield self.field_names
+        if len(self.list)>0:
+            for row in self.list:
+                yield row
 
     def get_row(self,index):# ($index)行を取得する
         if type(index) == int and 0 == index:
